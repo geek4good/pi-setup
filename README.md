@@ -66,7 +66,7 @@ pi install npm:pi-intercom
 ### Install this package
 
 ```bash
-pi install git:github.com/ruizrica/pi-setup
+pi install git:github.com/geek4good/pi-setup
 ```
 
 Restart Pi after installation.
