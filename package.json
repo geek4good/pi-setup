@@ -1,0 +1,35 @@
+{
+  "name": "@geek4good/pi-setup",
+  "version": "1.0.0",
+  "description": "Lean Pi setup for software development, security consulting, performance auditing, and research",
+  "author": "Ricardo Ruiz",
+  "license": "MIT",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ruizrica/pi-setup.git"
+  },
+  "keywords": [
+    "pi-package",
+    "pi",
+    "pi-coding-agent"
+  ],
+  "pi": {
+    "extensions": [
+      "./extensions"
+    ],
+    "agents": [
+      "./agents"
+    ],
+    "themes": [
+      "./themes"
+    ]
+  },
+  "peerDependencies": {
+    "pi-subagents": "*",
+    "pi-intercom": "*",
+    "pi-web-access": "*",
+    "pi-mcp-adapter": "*",
+    "beautiful-mermaid": "*"
+  }
+}
