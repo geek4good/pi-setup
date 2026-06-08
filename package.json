@@ -18,8 +18,14 @@
     "extensions": [
       "./extensions"
     ],
+    "prompts": [
+      "./prompts"
+    ],
     "agents": [
       "./agents"
+    ],
+    "skills": [
+      "./skills"
     ],
     "themes": [
       "./themes"
