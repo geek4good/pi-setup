@@ -378,7 +378,13 @@ export default function (pi: ExtensionAPI) {
 			const recentLogs = readRecentLogs();
 			const sessionState = readSessionState(ctx.cwd);
 
-			// Step 2: New session with parent link and memory injection
+			// Step 2: New session with parent link and memory injection.
+			//
+			// IMPORTANT: ctx is invalidated once newSession() replaces the
+			// session. Any post-replacement work MUST run inside withSession,
+			// which receives a fresh context bound to the new session. Using the
+			// captured ctx after newSession resolves throws
+			// "This extension ctx is stale after session replacement".
 			const result = await ctx.newSession({
 				parentSession: parentSessionFile,
 				setup: async (sm) => {
@@ -394,14 +400,19 @@ export default function (pi: ExtensionAPI) {
 						timestamp: Date.now(),
 					});
 				},
+				// Runs after the new session is live, with a fresh ctx. This is
+				// the only safe place to touch ctx/pi after replacement.
+				withSession: async (newCtx) => {
+					newCtx.ui.notify("Memory Cycle complete — fresh context with full memory.", "info");
+				},
 			});
 
+			// Safe to use the original ctx here: cancellation happens BEFORE
+			// the session is replaced, so ctx is still valid in this branch.
 			if (result.cancelled) {
 				ctx.ui.notify("Memory Cycle cancelled — session switch was blocked.", "warning");
 				return;
 			}
-
-			ctx.ui.notify("Memory Cycle complete — fresh context with full memory.", "success");
 		},
 	});
 
