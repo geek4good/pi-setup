@@ -21,9 +21,6 @@
     "agents": [
       "./agents"
     ],
-    "skills": [
-      "./skills"
-    ],
     "themes": [
       "./themes"
     ]
