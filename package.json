@@ -18,9 +18,6 @@
     "extensions": [
       "./extensions"
     ],
-    "prompts": [
-      "./prompts"
-    ],
     "agents": [
       "./agents"
     ],
